@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -23,6 +24,19 @@ class Post(models.Model):
     #default human-readable representation of the object. 
     def __str__(self):
         return self.title
+    
+
+    #To retrieve links of items for SEO reference, generate feeds e.t.c
+    #tell Django how to calculate the canonical URL(official url for a page)
+    # for an object
+    def get_absolute_url(self):
+        from django.urls import reverse
+        
+        #generate unique url for each post/product,,add sitemap info to each post
+        return reverse("post_detail", kwargs={"slug": str(self.slug)})
+   
+        
+        
 
 class Comment(models.Model):
     """Foreign key relation that establishes a many-to-one relationship with the Post model, 
@@ -42,3 +56,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
+    
+
+class Image(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='image')
+    #upload_to uploads images to  MEDIA_ROOT/images/ by default
+    #custom load_to: image = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+    def __str__(self):
+        return self.title

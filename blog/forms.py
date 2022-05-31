@@ -1,5 +1,7 @@
 from pyexpat import model
-from .models import Comment
+
+from attr import fields
+from .models import Comment, Image
 from django import forms
 
 
@@ -10,3 +12,11 @@ class CommentForm(forms.ModelForm):
         #by default django will generate all fields from the model
         #but we can define the fields we want explicitly
         fields = ('name', 'email', 'body')
+        
+
+class ImageForm(forms.ModelForm):
+    """Form for the image model"""
+    
+    class Meta:
+        model = Image
+        fields = ('title', 'image')

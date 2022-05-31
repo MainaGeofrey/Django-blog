@@ -1,0 +1,4 @@
+attr==0.3.1
+attrs==20.3.0
+Django==4.0.4
+django_heroku==0.3.1

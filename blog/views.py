@@ -8,6 +8,12 @@ from django.shortcuts import render, get_object_or_404
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
+    
+    #Pagination
+    #ListView has inbuilt support for pagination
+    #GET parameter controls pagination
+    #paginate by 3 posts a page
+    paginate_by = 3
 
 
 def post_detail(request, slug):

@@ -16,4 +16,7 @@ urlpatterns = [
     path("feed/rss", LatestPostsFeed(), name="post_feed"),
     path("upload/", views.image_upload_view, name="image_upload"),
     path("weather", views.weatherman, name="weatherman"),
+    path('scrape/', views.scrape, name="scrape"),
+    path("news_list", views.news_list, name="news_list"),
+
 ] 

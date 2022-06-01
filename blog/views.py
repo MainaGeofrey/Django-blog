@@ -1,9 +1,10 @@
 from re import template
 from django.views import generic
-from .models import Post
+from .models import Headline, Post 
 from .forms import CommentForm, ImageForm
-from django.shortcuts import render, get_object_or_404
-
+from django.shortcuts import redirect, render, get_object_or_404
+from bs4 import BeautifulSoup as Bsoup
+import requests
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -102,3 +103,36 @@ def weatherman(request):
     else:
         data = {}
     return render(request, "weatherman.html", data)
+
+
+#News aggregator
+#save data scraped website to database
+
+def scrape(request):
+    session = requests.Session()
+    session.headers = {"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"}
+    url = "https://www.theonion.com/"
+    
+    content = session.get(url, verify=False).content
+    soup = Bsoup(content, "html.parser")
+    News = soup.find_all('div', {"class":"curation-module__item"})
+    for article in News:
+        main = article.find_all('a')[0]
+        link = min['href']
+        image_src = str(main.find('img')['srcset']).split(" ")[-4] 
+        title = main['title']
+        new_headLine = Headline()
+        new_headLine.title = title
+        new_headLine.url = link
+        new_headLine.image = image_src
+        new_headLine.save()
+        return redirect("news.html")
+    
+    
+#Serve the stored database objects
+def news_list(request):
+    headlines = Headline.objects.all()[::1]
+    context = {
+        'object_list': headlines,
+    }
+    return render(request, "news.html", context)

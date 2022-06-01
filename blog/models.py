@@ -2,7 +2,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 STATUS = (
     (0,"Draft"),
     (1,"Publish")
@@ -65,3 +64,16 @@ class Image(models.Model):
     #custom load_to: image = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
     def __str__(self):
         return self.title
+    
+
+#News aggregator
+#save data scraped website to database
+class Headline(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.URLField(null=True, blank=True)
+    url = models.URLField(blank=True)
+    
+    def __str__(self):
+        return self.title
+    
+    

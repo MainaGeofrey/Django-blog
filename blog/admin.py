@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Headline, Post, Comment
 
 #customizing representation of data on the screen
 class PostAdmin(admin.ModelAdmin):
@@ -23,3 +23,4 @@ class CommentAdmin (admin.ModelAdmin):
         
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Headline)

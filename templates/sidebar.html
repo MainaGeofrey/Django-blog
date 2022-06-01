@@ -8,14 +8,13 @@
 </style>
 
 <!-- Sidebar Widgets Column -->
-<div class="col-md-4 float-right ">
+<div class="col-md-4 float-left ">
 <div class="card my-4">
-        <h5 class="card-header">About Us</h5>
+        <h5 class="card-header">Bloggee informa</h5>
     <div class="card-body">
-        <p class="card-text"> Bloge is powered by Django. Django is the best web development framework.
-             Django uses jinja templating engine.</p>
-        <a href="#"
-           class="btn btn-danger">Know more!</a>
+        <p class="card-text"> Press the button below to see the weather today.</p>
+        <a href="{% url 'weatherman' %}"
+           class="btn btn-primary">Weatherman</a>
     </div>
 </div>
 </div>

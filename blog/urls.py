@@ -15,4 +15,5 @@ urlpatterns = [
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
     path("feed/rss", LatestPostsFeed(), name="post_feed"),
     path("upload/", views.image_upload_view, name="image_upload"),
+    path("weather", views.weatherman, name="weatherman"),
 ] 

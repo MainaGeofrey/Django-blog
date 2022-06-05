@@ -1,4 +1,8 @@
 attr==0.3.1
 attrs==20.3.0
-Django==4.0.4
-django_heroku==0.3.1
+beautifulsoup4==4.11.1
+Django==3.0.14
+djangorestframework==3.13.1
+newsapi==0.1.1
+newsapi_python==0.2.6
+requests==2.25.1
